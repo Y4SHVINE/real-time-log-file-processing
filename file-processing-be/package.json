@@ -1,0 +1,36 @@
+{
+  "name": "file-processing-be",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --ext ts --exec ts-node server.ts",
+    "worker": "nodemon --legacy-watch worker.ts",
+    "docker-dev": "nodemon --legacy-watch server.ts",
+    "start": "concurrently \"npm:docker-dev\" \"npm:worker\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Yashvida Jayasekara",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "@types/node": "^22.13.9",
+    "bullmq": "^5.41.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "ioredis": "^5.6.0",
+    "multer": "^1.4.5-lts.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2",
+    "ws": "^8.18.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/multer": "^1.4.12",
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.9"
+  }
+}
