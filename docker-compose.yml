@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  backend:
+    build: ./file-processing-be
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./file-processing-be:/app
+    command: ["npm", "run", "start"]  
+    depends_on:
+      - redis
+    env_file:
+      - ./file-processing-be/.env
+  frontend:
+    build: ./file-processing-fe
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./file-processing-fe:/app
+    command: ["npm", "run", "dev"]
+    depends_on:
+      - backend
