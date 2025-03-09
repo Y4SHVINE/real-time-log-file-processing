@@ -15,7 +15,7 @@ ws.on("error", (err) => {
 });
 
 const worker = new Worker(
-  config.BullMQQueue,
+  config.bullMQQueue,
   async (job: Job) => {
     console.log("Worker Started for new Job");
     const { filePath, fileId } = job.data;
