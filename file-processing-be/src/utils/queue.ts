@@ -1,10 +1,11 @@
 import { Queue } from "bullmq";
 import Redis from "ioredis";
+import { config } from "../constants/config";
 
-const redis = new Redis({
-    host: process.env.REDIS_HOST,
-    port: Number(process.env.REDIS_PORT),
+export const redis = new Redis({
+    host: config.redisHost,
+    port: config.redisPort,
     maxRetriesPerRequest: null,
 });
 
-export const logQueue = new Queue("log-processing-queue", { connection: redis });
+export const logQueue = new Queue(config.bullMQQueue, { connection: redis });

@@ -6,8 +6,9 @@
     "dev": "nodemon --ext ts --exec ts-node server.ts",
     "worker": "nodemon --legacy-watch worker.ts",
     "docker-dev": "nodemon --legacy-watch server.ts",
-    "start": "concurrently \"npm:docker-dev\" \"npm:worker\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ws-dev": "nodemon --legacy-watch wsServer.ts",
+    "start": "concurrently \"npm:docker-dev\" \"npm:ws-dev\" \"npm:worker\"",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Yashvida Jayasekara",
@@ -21,6 +22,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "ioredis": "^5.6.0",
+    "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2",
@@ -29,8 +31,14 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/multer": "^1.4.12",
+    "@types/supertest": "^6.0.2",
     "concurrently": "^9.1.2",
-    "nodemon": "^3.1.9"
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.6"
   }
 }

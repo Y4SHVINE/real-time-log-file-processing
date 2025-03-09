@@ -1,27 +1,42 @@
-version: '3.8'
+version: "3.8"
+
 services:
   redis:
     image: redis:latest
     ports:
       - "6379:6379"
+    networks:
+      - app-network
 
   backend:
     build: ./file-processing-be
     ports:
       - "3001:3001"
+      - "3002:3002"
     volumes:
       - ./file-processing-be:/app
-    command: ["npm", "run", "start"]  
+    command: ["npm", "run", "start"]
     depends_on:
       - redis
     env_file:
       - ./file-processing-be/.env
+    networks:
+      - app-network
+    stdin_open: true
+    tty: true
+
   frontend:
-    build: ./file-processing-fe
+    build: ./log-file-processing-fe
     ports:
       - "3000:3000"
     volumes:
-      - ./file-processing-fe:/app
+      - ./log-file-processing-fe:/app
     command: ["npm", "run", "dev"]
     depends_on:
       - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
